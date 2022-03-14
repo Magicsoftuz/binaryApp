@@ -11,7 +11,7 @@ async function main() {
   });
 }
 main().then(console.log).catch(console.error);
-
+let proposal_id;
 function tickStreamDemo() {
   api.events.on("tick", function (response) {
     let data = JSON.parse(JSON.stringify(response));
@@ -20,7 +20,6 @@ function tickStreamDemo() {
     let buyFunc = function () {
       let param = {};
       param.amount = 0.35;
-      param.barrier = "0";
       param.basis = "stake";
       param.contract_type = "CALL";
       param.currency = "USD";
@@ -28,8 +27,16 @@ function tickStreamDemo() {
       param.duration_unit = "t";
       param.symbol = "R_10";
       let max = 1;
-      api.buyContractParams(param, max).then(console.log).catch(console.error);
+      api
+        .buyContractParams(param, max)
+        .then((response, reject) => {
+          //map what you need hereprobably:
+          proposal_id = response.proposal;
+        })
+        .catch(console.error);
+      console.log(`ID: ` + proposal_id);
     };
+    buyFunc();
   });
   api.subscribeToTick("R_10");
 }

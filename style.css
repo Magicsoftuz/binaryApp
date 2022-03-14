@@ -2,7 +2,23 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100vh;
 }
 .container {
+  height: 70vh;
   width: 70%;
+  background-image: linear-gradient(to left bottom, #051937, #a8eb12);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn-start {
+  display: inline-block;
+  background-color: white;
+  padding: 20px 40px;
+}
+.btn-stop {
+  padding: 20px 40px;
+  display: inline-block;
+  background-color: red;
 }
